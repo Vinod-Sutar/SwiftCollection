@@ -10,7 +10,7 @@ import Cocoa
 
 class GuidelineCollectionView: NSCollectionView {
 
-    var guidelineItems = NSMutableArray()
+    var guidelineItems = NSArray()
     
     var draggingIndexPaths: Set<IndexPath> = []
     
@@ -34,6 +34,8 @@ class GuidelineCollectionView: NSCollectionView {
     }
     
     public func reloadGuidelines(_ guidelines: NSArray, searchText: NSString) {
+        
+        guidelineItems = guidelines;
         
         
     }
