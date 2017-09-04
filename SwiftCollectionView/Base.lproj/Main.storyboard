@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -706,6 +706,9 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
+                                        <connections>
+                                            <action selector="searchTextChanged:" target="XfG-lQ-9wD" id="abZ-pA-J0a"/>
+                                        </connections>
                                     </searchField>
                                 </subviews>
                                 <constraints>
@@ -723,13 +726,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="874" height="367"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <collectionView id="z9K-dV-JkG" customClass="GuidelineCollectionView" customModule="SwiftCollectionView" customModuleProvider="target">
+                                                <collectionView selectable="YES" allowsMultipleSelection="YES" id="z9K-dV-JkG" customClass="GuidelineCollectionView" customModule="SwiftCollectionView" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="874" height="367"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="Wce-5i-Pkh">
-                                                        <size key="itemSize" width="50" height="50"/>
+                                                        <size key="itemSize" width="160" height="220"/>
+                                                        <edgeInsets key="sectionInset" left="50" right="50" top="30" bottom="30"/>
                                                     </collectionViewFlowLayout>
                                                     <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="XfG-lQ-9wD" id="AcP-cZ-BnP"/>
+                                                        <outlet property="delegate" destination="XfG-lQ-9wD" id="Yvx-fm-bjv"/>
+                                                    </connections>
                                                 </collectionView>
                                             </subviews>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -743,11 +751,25 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFv-cT-Zfu">
+                                        <rect key="frame" x="335" y="171" width="204" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="Q6q-jy-lfj"/>
+                                            <constraint firstAttribute="width" constant="200" id="TVf-sV-Kwr"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Loading..." id="I5M-FU-IFJ">
+                                            <font key="font" metaFont="system" size="17"/>
+                                            <color key="textColor" red="0.3411764706" green="0.3411764706" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="8z6-H6-aZ9" firstAttribute="top" secondItem="IAS-vk-mer" secondAttribute="top" id="AOy-bS-sjN"/>
+                                    <constraint firstItem="VFv-cT-Zfu" firstAttribute="centerX" secondItem="IAS-vk-mer" secondAttribute="centerX" id="hgy-ZU-oMv"/>
                                     <constraint firstItem="8z6-H6-aZ9" firstAttribute="leading" secondItem="IAS-vk-mer" secondAttribute="leading" id="k5f-zx-8cC"/>
                                     <constraint firstAttribute="trailing" secondItem="8z6-H6-aZ9" secondAttribute="trailing" id="mO9-Va-Xrg"/>
+                                    <constraint firstItem="VFv-cT-Zfu" firstAttribute="centerY" secondItem="IAS-vk-mer" secondAttribute="centerY" id="rYJ-Bg-cl3"/>
                                     <constraint firstAttribute="bottom" secondItem="8z6-H6-aZ9" secondAttribute="bottom" id="ssF-82-13C"/>
                                 </constraints>
                             </customView>
@@ -774,6 +796,11 @@
                             <constraint firstItem="pL1-4n-Yxo" firstAttribute="top" secondItem="IAS-vk-mer" secondAttribute="bottom" id="ySL-28-yVD"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="guidelineCollectionView" destination="z9K-dV-JkG" id="HOn-U6-Td3"/>
+                        <outlet property="loadingLabel" destination="VFv-cT-Zfu" id="rOp-Ej-nDh"/>
+                        <outlet property="searchTextField" destination="WXT-JH-QF2" id="lYD-vV-nmw"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

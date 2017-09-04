@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="GuidelineItem" customModule="SwiftCollectionView" customModuleProvider="target">
             <connections>
+                <outlet property="guidelineImage" destination="nbu-FD-RfY" id="gik-5O-KgV"/>
+                <outlet property="guidelineTitleLabel" destination="fW8-zm-vJr" id="qmu-Jf-DQL"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="180" height="230"/>
+        <customView wantsLayer="YES" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="160" height="220"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nbu-FD-RfY">
-                    <rect key="frame" x="30" y="80" width="120" height="120"/>
+                    <rect key="frame" x="25" y="75" width="110" height="110"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="eR3-py-Uuz"/>
                 </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fW8-zm-vJr">
+                    <rect key="frame" x="8" y="0.0" width="144" height="63"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="fMa-Z4-uB8">
+                        <font key="font" metaFont="system" size="15"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="nbu-FD-RfY" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="30" id="2Di-Sg-aj5"/>
-                <constraint firstAttribute="bottom" secondItem="nbu-FD-RfY" secondAttribute="bottom" constant="80" id="UND-Ti-j10"/>
-                <constraint firstItem="nbu-FD-RfY" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="30" id="cTh-Mm-LYi"/>
-                <constraint firstAttribute="trailing" secondItem="nbu-FD-RfY" secondAttribute="trailing" constant="30" id="cjF-fp-eyz"/>
+                <constraint firstAttribute="bottom" secondItem="fW8-zm-vJr" secondAttribute="bottom" id="00c-EE-8Dk"/>
+                <constraint firstItem="nbu-FD-RfY" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="25" id="2Di-Sg-aj5"/>
+                <constraint firstItem="fW8-zm-vJr" firstAttribute="top" secondItem="nbu-FD-RfY" secondAttribute="bottom" constant="12" id="3jV-ln-JqW"/>
+                <constraint firstItem="fW8-zm-vJr" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="P9F-vj-74X"/>
+                <constraint firstAttribute="bottom" secondItem="nbu-FD-RfY" secondAttribute="bottom" constant="75" id="UND-Ti-j10"/>
+                <constraint firstItem="nbu-FD-RfY" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="35" id="cTh-Mm-LYi"/>
+                <constraint firstAttribute="trailing" secondItem="nbu-FD-RfY" secondAttribute="trailing" constant="25" id="cjF-fp-eyz"/>
+                <constraint firstAttribute="trailing" secondItem="fW8-zm-vJr" secondAttribute="trailing" constant="10" id="zcb-qe-BEC"/>
             </constraints>
-            <point key="canvasLocation" x="13" y="168.5"/>
+            <point key="canvasLocation" x="3" y="176"/>
         </customView>
-        <customObject id="aVu-fE-XL0"/>
+        <customObject id="aVu-fE-XL0" customClass="GuidelineItem" customModule="SwiftCollectionView" customModuleProvider="target"/>
     </objects>
 </document>
