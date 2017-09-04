@@ -359,20 +359,24 @@ extension ViewController: NSCollectionViewDelegate {
         return .move
     }
     
-    
-    func collectionView(_ collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, index: Int, dropOperation: NSCollectionViewDropOperation) -> Bool {
+    func collectionView(_ collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, indexPath: IndexPath, dropOperation: NSCollectionViewDropOperation) -> Bool {
         
         for fromIndexPath in draggingIndexPaths {
             
+            
             let item = guidelineItems.removeFirst()
             
-            guidelineItems.insert(item, at: (index <= fromIndexPath.item) ? index : (index - 1))
+            let toIndexPath: IndexPath = IndexPath(index:(indexPath.item <= fromIndexPath.item) ? indexPath.item : (indexPath.item - 1));
             
-            NSAnimationContext.current().duration = 0
+            guidelineItems.insert(item, at: toIndexPath.item)
             
-            let toIndexPath: IndexPath = IndexPath(item: index, section: fromIndexPath.section)
+            NSAnimationContext.current().duration = 0.5
             
             collectionView.animator().moveItem(at: fromIndexPath, to: toIndexPath)
+             
+             print("\(fromIndexPath)::\(indexPath)")
+            
+            //print("\(fromIndexPath)")
         }
         
         return true

@@ -108,7 +108,7 @@
 				TargetAttributes = {
 					4974884A1F59883B0096F1A3 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 8CD4S7H2U8;
+						DevelopmentTeam = A6MMTTKZLS;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -270,7 +270,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 8CD4S7H2U8;
+				DEVELOPMENT_TEAM = A6MMTTKZLS;
 				INFOPLIST_FILE = SwiftCollectionView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.media4u.SwiftCollectionView;
@@ -286,7 +286,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 8CD4S7H2U8;
+				DEVELOPMENT_TEAM = A6MMTTKZLS;
 				INFOPLIST_FILE = SwiftCollectionView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.media4u.SwiftCollectionView;
