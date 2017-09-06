@@ -7,20 +7,23 @@
 //
 
 import Cocoa
+import MultipeerConnectivity
 
 class ViewController: NSViewController {
     
-    var appArray:[Guideline] = []
+    var allApps:[Guideline] = []
     
     var appStoreSearchURLs: NSMutableArray = []
     
     var currentDownloadingGuideline: Guideline?
     
-    var guidelineItems:[Guideline] = []
+    var filteredApps:[Guideline] = []
     
     var draggingIndexPaths: Set<IndexPath> = []
     
     var draggingItem: NSCollectionViewItem?
+    
+    var mpcManager:MPCManager = MPCManager()
     
     @IBOutlet var guidelineCollectionView: GuidelineCollectionView!
     
@@ -28,13 +31,25 @@ class ViewController: NSViewController {
     
     @IBOutlet var loadingLabel: NSTextField!
     
+    @IBOutlet var connectedDevicesLabel: NSTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchTextField.delegate = self;
+        mpcManager.delegate = self;
         guidelineCollectionView.register(forDraggedTypes: [NSPasteboardTypeString])
         guidelineCollectionView.setDraggingSourceOperationMask(.every, forLocal:true)
-    
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(fieldTextDidChange), name:NSNotification.Name(rawValue: "NSTextDidChangeNotification"), object: nil)
+
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func fieldTextDidChange() {
+        
+        reloadGuidelines(allApps, searchText: searchTextField.stringValue)
     }
 
     override var representedObject: Any? {
@@ -46,7 +61,11 @@ class ViewController: NSViewController {
     
     @IBAction func searchTextChanged(_ sender: Any) {
         
-        reloadGuidelines(appArray, searchText: searchTextField.stringValue)
+    }
+    
+    @IBAction func refreshClicked(_ sender: Any) {
+        
+        sendAppDataToConnectedDevices()
     }
     
     func setCollectionViewPlaceHolder(_ placeHolderString: String)  {
@@ -63,18 +82,20 @@ class ViewController: NSViewController {
         
         if searchText == ""
         {
-            guidelineItems = guidelines;
+            filteredApps = guidelines;
         }
         else
         {
-            guidelineItems = guidelineItems.filter { $0.guidelineName.localizedCaseInsensitiveContains(searchText)}
+            filteredApps = filteredApps.filter { $0.name.localizedCaseInsensitiveContains(searchText)}
         }
         
-        guidelineItems = guidelineItems.sorted(by: {$0.guidelineName < $1.guidelineName})
+        filteredApps = filteredApps.sorted(by: {$0.name < $1.name})
         
         setCollectionViewPlaceHolder("")
         
         guidelineCollectionView.reloadData()
+        
+        sendAppDataToConnectedDevices()
     }
     
     override func viewWillAppear() {
@@ -116,7 +137,7 @@ class ViewController: NSViewController {
                         
                         if (wrapperType == "software")
                         {
-                            self.appArray.append(Guideline(appDictionary))
+                            self.allApps.append(Guideline(appDictionary))
                         }
                     }
                     
@@ -157,7 +178,7 @@ class ViewController: NSViewController {
             }
             else
             {
-                let urlString:String = currentApp!.guidelineImagePath
+                let urlString:String = currentApp!.imagePath
                 
                 let config: URLSessionConfiguration = URLSessionConfiguration.default
                 
@@ -209,16 +230,14 @@ class ViewController: NSViewController {
         {
             if (appStoreSearchURLs.count == 0)
             {
-                reloadGuidelines(appArray, searchText:"")
+                reloadGuidelines(allApps, searchText:"")
             }
             else
             {
                 downloadGuidelineWithURL(appStoreSearchURLs[0] as! URL);
             }
         }
-    
     }
-    
     
     func getImagePath(_ currentApp: NSDictionary) -> String {
         
@@ -238,20 +257,20 @@ class ViewController: NSViewController {
     
     func getNextElement() -> Guideline? {
         
-        if (appArray.count > 0)
+        if (allApps.count > 0)
         {
             if currentDownloadingGuideline == nil
             {
-                currentDownloadingGuideline = appArray[0]
+                currentDownloadingGuideline = allApps[0]
                 return currentDownloadingGuideline;
             }
             else
             {
-                let currentItemIndex = appArray.index(of: currentDownloadingGuideline!)
+                let currentItemIndex = allApps.index(of: currentDownloadingGuideline!)
                 
-                if currentItemIndex != appArray.count - 1 && currentItemIndex != NSNotFound
+                if currentItemIndex != allApps.count - 1 && currentItemIndex != NSNotFound
                 {
-                    currentDownloadingGuideline = appArray[currentItemIndex! + 1]
+                    currentDownloadingGuideline = allApps[currentItemIndex! + 1]
                     
                     return currentDownloadingGuideline;
                 }
@@ -260,18 +279,110 @@ class ViewController: NSViewController {
         
         return nil;
     }
+    
+    func sendAppDataToConnectedDevices() {
+        
+        let appDictionary = NSMutableArray()
+        
+        for guideline in filteredApps {
+            
+            let temp: [String: String] = [
+                "identifier": guideline.identifier,
+                "name": guideline.name,
+                "version": guideline.version,
+                "imagePath": guideline.imagePath
+            ]
+            
+            appDictionary.add(temp)
+        }
+        
+        
+        let appDict: [String: Any] = [
+            "wrapperType": "apps",
+            "results": appDictionary
+            ]
+        
+        mpcManager.sendDataToConnectedPeers(appDict)
+    }
+}
+
+extension ViewController: NSTextFieldDelegate {
+    
+    func textField(_ textField: NSTextField, textView: NSTextView, shouldSelectCandidateAt index: Int) -> Bool {
+        
+        print("Hurray")
+        return true
+    }
+}
+
+extension ViewController: MPCManagerDelegate {
+    
+    func didConnectedPeersListUpdated() {
+        
+        var connectedDeviceString = ""
+        
+        let connectedPeers = mpcManager.session.connectedPeers;
+        
+        if connectedPeers.count == 0 {
+            
+        }
+        else {
+            
+            connectedDeviceString = connectedDeviceString.appending("Device connected: ")
+            
+            for peerID in connectedPeers {
+                
+                if peerID == connectedPeers.first && peerID == connectedPeers.last
+                {
+                    connectedDeviceString = connectedDeviceString.appending("\(peerID.displayName).")
+                }
+                else if peerID == connectedPeers.first
+                {
+                    connectedDeviceString = connectedDeviceString.appending("\(peerID.displayName)")
+                }
+                else if peerID == connectedPeers.last
+                {
+                    connectedDeviceString = connectedDeviceString.appending(" and \(peerID.displayName).")
+                }
+                else
+                {
+                    connectedDeviceString = connectedDeviceString.appending(", \(peerID.displayName)")
+                }
+                
+                OperationQueue.main.addOperation (){
+                    
+                    self.connectedDevicesLabel.stringValue = connectedDeviceString
+                }
+            }
+            
+            sendAppDataToConnectedDevices()
+        }
+    }
 }
 
 
+extension ViewController: MCBrowserViewControllerDelegate {
+    
+    // Notifies the delegate, when the user taps the done button.
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        browserViewController.dismiss(nil)
+    }
+    
+    // Notifies delegate that the user taps the cancel button.
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        browserViewController.dismiss(nil)
+    }
+}
 
 extension ViewController: NSCollectionViewDataSource {
     
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        let count: Int = guidelineItems.count
+        let count: Int = filteredApps.count
         
-        if appArray.count == 0
+        if allApps.count == 0
         {
+            
             setCollectionViewPlaceHolder("No guidelines found")
         }
         else if count == 0
@@ -290,12 +401,12 @@ extension ViewController: NSCollectionViewDataSource {
         
         let item: GuidelineItem = collectionView.makeItem(withIdentifier: "GuidelineItem", for: indexPath) as! GuidelineItem
         
-        let guideline: Guideline = guidelineItems[indexPath.item]
+        let guideline: Guideline = filteredApps[indexPath.item]
         
         if let image = guideline.getGuidelineImage()
         {
             item.guidelineImage.image = image;
-            item.guidelineTitleLabel.stringValue = guideline.guidelineName;
+            item.guidelineTitleLabel.stringValue = guideline.name;
         }
         
         return item
@@ -312,7 +423,7 @@ extension ViewController: NSCollectionViewDelegate {
     
     func collectionView(_ collectionView: NSCollectionView, willDisplay item: NSCollectionViewItem, forRepresentedObjectAt indexPath: IndexPath) {
         
-        let guideline = guidelineItems[indexPath.item]
+        let guideline = filteredApps[indexPath.item]
         
         if let image = guideline.getGuidelineImage()
         {
@@ -340,10 +451,10 @@ extension ViewController: NSCollectionViewDelegate {
     
     func collectionView(_ collectionView: NSCollectionView, pasteboardWriterForItemAt indexPath: IndexPath) -> NSPasteboardWriting? {
         
-        let guideline = guidelineItems[indexPath.item]
+        let guideline = filteredApps[indexPath.item]
         
         let pb = NSPasteboardItem()
-        pb.setString(guideline.guidelineId as String, forType: NSPasteboardTypeString)
+        pb.setString(guideline.identifier as String, forType: NSPasteboardTypeString)
         return pb
     }
     
@@ -361,23 +472,28 @@ extension ViewController: NSCollectionViewDelegate {
     
     func collectionView(_ collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, indexPath: IndexPath, dropOperation: NSCollectionViewDropOperation) -> Bool {
         
+        
         for fromIndexPath in draggingIndexPaths {
             
+            let removeIndex = fromIndexPath.item
             
-            let item = guidelineItems.removeFirst()
+            let removedGuideline = filteredApps.remove(at: removeIndex)
+    
+            filteredApps.insert(removedGuideline, at: indexPath.item)
             
-            let toIndexPath: IndexPath = IndexPath(index:(indexPath.item <= fromIndexPath.item) ? indexPath.item : (indexPath.item - 1));
             
-            guidelineItems.insert(item, at: toIndexPath.item)
+            let appDict: [String: Any] = [
+                "wrapperType": "apps-position",
+                "position": [
+                    "from" : removeIndex,
+                    "to" : indexPath.item
+                ]
+            ]
             
-            NSAnimationContext.current().duration = 0.5
-            
-            collectionView.animator().moveItem(at: fromIndexPath, to: toIndexPath)
-             
-             print("\(fromIndexPath)::\(indexPath)")
-            
-            //print("\(fromIndexPath)")
+            mpcManager.sendDataToConnectedPeers(appDict)
         }
+        
+        
         
         return true
     }

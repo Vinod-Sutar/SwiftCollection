@@ -10,24 +10,24 @@ import Cocoa
 
 class Guideline: NSObject {
     
-    var guidelineId: String = ""
-    var guidelineName: String = ""
-    var guidelineVersion: String = ""
-    var guidelineImagePath: String = ""
+    var identifier: String = ""
+    var name: String = ""
+    var version: String = ""
+    var imagePath: String = ""
     
     init(_ guidelineDictionary: NSDictionary) {
         
         let trackId: Int = guidelineDictionary["trackId"] as! Int
-        guidelineId = String(describing: trackId)
-        guidelineName = guidelineDictionary["trackName"] as! String
-        guidelineVersion = guidelineDictionary["version"] as! String
-        guidelineImagePath = guidelineDictionary["artworkUrl512"] as! String
+        identifier = String(describing: trackId)
+        name = guidelineDictionary["trackName"] as! String
+        version = guidelineDictionary["version"] as! String
+        imagePath = guidelineDictionary["artworkUrl512"] as! String
     }
     
     func getGuidelineImagePath() -> String {
         
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        return "\(documentDirectory)/Images/\(guidelineId)_\(guidelineVersion).png"
+        return "\(documentDirectory)/Images/\(identifier)_\(version).png"
     }
     
     func getGuidelineImage() -> NSImage? {

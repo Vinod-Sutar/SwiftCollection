@@ -12,11 +12,11 @@
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="SwiftCollectionView" id="1Xt-HY-uBw">
+                            <menuItem title="AppConfiguratorMacApp" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="SwiftCollectionView" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="AppConfiguratorMacApp" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About SwiftCollectionView" id="5kV-Vb-QxS">
+                                        <menuItem title="About AppConfiguratorMacApp" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
@@ -30,7 +30,7 @@
                                             <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide SwiftCollectionView" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide AppConfiguratorMacApp" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
                                             </connections>
@@ -48,7 +48,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit SwiftCollectionView" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quit AppConfiguratorMacApp" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -641,7 +641,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="SwiftCollectionView Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="AppConfiguratorMacApp Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
@@ -655,7 +655,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="SwiftCollectionView" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="AppConfiguratorMacApp" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
@@ -681,7 +681,7 @@
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="SwiftCollectionView" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="AppConfiguratorMacApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="874" height="517"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -726,7 +726,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="874" height="367"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <collectionView selectable="YES" id="z9K-dV-JkG" customClass="GuidelineCollectionView" customModule="SwiftCollectionView" customModuleProvider="target">
+                                                <collectionView selectable="YES" id="z9K-dV-JkG" customClass="GuidelineCollectionView" customModule="AppConfiguratorMacApp" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="874" height="367"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="Wce-5i-Pkh">
@@ -775,8 +775,38 @@
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="pL1-4n-Yxo">
                                 <rect key="frame" x="0.0" y="0.0" width="874" height="50"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkS-qe-g3b">
+                                        <rect key="frame" x="18" y="16" width="838" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Not connected" id="hkh-xQ-oJ0">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Eak-Bd-bXq">
+                                        <rect key="frame" x="779" y="7" width="81" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="nCR-pS-8LZ"/>
+                                            <constraint firstAttribute="width" constant="69" id="yph-GK-Rlp"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="push" title="Refresh" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="D1s-qU-kta">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="refreshClicked:" target="XfG-lQ-9wD" id="h1e-LF-tHu"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
+                                    <constraint firstItem="Eak-Bd-bXq" firstAttribute="centerY" secondItem="pL1-4n-Yxo" secondAttribute="centerY" id="Naa-IS-HFg"/>
                                     <constraint firstAttribute="height" constant="50" id="Pdc-e7-zJa"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZkS-qe-g3b" secondAttribute="bottom" constant="16" id="mSa-ph-QMw"/>
+                                    <constraint firstItem="ZkS-qe-g3b" firstAttribute="top" secondItem="pL1-4n-Yxo" secondAttribute="top" constant="17" id="tdv-85-S2J"/>
+                                    <constraint firstAttribute="trailing" secondItem="Eak-Bd-bXq" secondAttribute="trailing" constant="20" id="tqH-Qh-gEu"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZkS-qe-g3b" secondAttribute="trailing" constant="20" id="vXF-Cv-k8q"/>
+                                    <constraint firstItem="ZkS-qe-g3b" firstAttribute="leading" secondItem="pL1-4n-Yxo" secondAttribute="leading" constant="20" id="wMR-ZO-Kax"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -797,6 +827,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="connectedDevicesLabel" destination="ZkS-qe-g3b" id="uC7-9e-Xii"/>
                         <outlet property="guidelineCollectionView" destination="z9K-dV-JkG" id="HOn-U6-Td3"/>
                         <outlet property="loadingLabel" destination="VFv-cT-Zfu" id="rOp-Ej-nDh"/>
                         <outlet property="searchTextField" destination="WXT-JH-QF2" id="lYD-vV-nmw"/>

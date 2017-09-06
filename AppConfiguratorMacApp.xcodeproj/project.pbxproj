@@ -20,7 +20,7 @@
 
 /* Begin PBXFileReference section */
 		17B964B01F5C029100DF64E9 /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
-		4974884B1F59883B0096F1A3 /* SwiftCollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftCollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4974884B1F59883B0096F1A3 /* AppConfiguratorMacApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppConfiguratorMacApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4974884E1F59883B0096F1A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		497488501F59883B0096F1A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		497488521F59883B0096F1A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 		4974884C1F59883B0096F1A3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4974884B1F59883B0096F1A3 /* SwiftCollectionView.app */,
+				4974884B1F59883B0096F1A3 /* AppConfiguratorMacApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,9 +79,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4974884A1F59883B0096F1A3 /* SwiftCollectionView */ = {
+		4974884A1F59883B0096F1A3 /* AppConfiguratorMacApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4974885A1F59883B0096F1A3 /* Build configuration list for PBXNativeTarget "SwiftCollectionView" */;
+			buildConfigurationList = 4974885A1F59883B0096F1A3 /* Build configuration list for PBXNativeTarget "AppConfiguratorMacApp" */;
 			buildPhases = (
 				497488471F59883B0096F1A3 /* Sources */,
 				497488481F59883B0096F1A3 /* Frameworks */,
@@ -91,9 +91,9 @@
 			);
 			dependencies = (
 			);
-			name = SwiftCollectionView;
+			name = AppConfiguratorMacApp;
 			productName = SwiftCollectionView;
-			productReference = 4974884B1F59883B0096F1A3 /* SwiftCollectionView.app */;
+			productReference = 4974884B1F59883B0096F1A3 /* AppConfiguratorMacApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -113,7 +113,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 497488461F59883B0096F1A3 /* Build configuration list for PBXProject "SwiftCollectionView" */;
+			buildConfigurationList = 497488461F59883B0096F1A3 /* Build configuration list for PBXProject "AppConfiguratorMacApp" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -126,7 +126,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4974884A1F59883B0096F1A3 /* SwiftCollectionView */,
+				4974884A1F59883B0096F1A3 /* AppConfiguratorMacApp */,
 			);
 		};
 /* End PBXProject section */
@@ -299,7 +299,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		497488461F59883B0096F1A3 /* Build configuration list for PBXProject "SwiftCollectionView" */ = {
+		497488461F59883B0096F1A3 /* Build configuration list for PBXProject "AppConfiguratorMacApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				497488581F59883B0096F1A3 /* Debug */,
@@ -308,7 +308,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4974885A1F59883B0096F1A3 /* Build configuration list for PBXNativeTarget "SwiftCollectionView" */ = {
+		4974885A1F59883B0096F1A3 /* Build configuration list for PBXNativeTarget "AppConfiguratorMacApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4974885B1F59883B0096F1A3 /* Debug */,
