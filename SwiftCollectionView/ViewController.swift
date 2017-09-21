@@ -290,7 +290,8 @@ class ViewController: NSViewController {
                 "identifier": guideline.identifier,
                 "name": guideline.name,
                 "version": guideline.version,
-                "imagePath": guideline.imagePath
+                "imagePath": guideline.imagePath,
+                "imageName": guideline.getGuidelineImageName()
             ]
             
             appDictionary.add(temp)
@@ -298,7 +299,7 @@ class ViewController: NSViewController {
         
         
         let appDict: [String: Any] = [
-            "wrapperType": "apps",
+            "performTask": "apps-list",
             "results": appDictionary
             ]
         
@@ -483,7 +484,7 @@ extension ViewController: NSCollectionViewDelegate {
             
             
             let appDict: [String: Any] = [
-                "wrapperType": "apps-position",
+                "performTask": "apps-position",
                 "position": [
                     "from" : removeIndex,
                     "to" : indexPath.item

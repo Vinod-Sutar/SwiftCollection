@@ -726,7 +726,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="874" height="367"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <collectionView selectable="YES" id="z9K-dV-JkG" customClass="GuidelineCollectionView" customModule="AppConfiguratorMacApp" customModuleProvider="target">
+                                                <collectionView selectable="YES" allowsEmptySelection="NO" id="z9K-dV-JkG" customClass="GuidelineCollectionView" customModule="AppConfiguratorMacApp" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="874" height="367"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="Wce-5i-Pkh">

@@ -55,6 +55,17 @@ class MPCManager: NSObject {
             }
         }
     }
+    
+    func sendResourcesToConnectedPeers(_ filePath: String, withName: String, peerID: MCPeerID) {
+        
+        let resourceURL = URL(fileURLWithPath: filePath)
+        
+        session.sendResource(at: resourceURL, withName: withName, toPeer: peerID, withCompletionHandler: { (error) -> Void in
+            if error != nil{
+                NSLog("Error in sending resource send resource: \(error?.localizedDescription)")
+            }
+        })
+    }
 }
 
 extension MPCManager: MCSessionDelegate {
@@ -71,6 +82,8 @@ extension MPCManager: MCSessionDelegate {
             
         default:
             print("Did not connect to session: \(session)")
+            browser.invitePeer(peerID, to: session, withContext: nil, timeout: 30)
+
         }
         
         delegate?.didConnectedPeersListUpdated()
@@ -80,6 +93,18 @@ extension MPCManager: MCSessionDelegate {
     // Received data from remote peer.
     public func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         
+        let dictionary = NSKeyedUnarchiver.unarchiveObject(with: data) as! Dictionary<String, String>
+        
+        let performTask = dictionary["performTask"]
+        
+        if performTask == "need-image" {
+            
+            let imageName:String = dictionary["imageName"]!
+            
+            let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            
+            sendResourcesToConnectedPeers("\(documentDirectory)/Images/\(imageName)", withName: "image--\(imageName)", peerID: peerID)
+        }
     }
     
     

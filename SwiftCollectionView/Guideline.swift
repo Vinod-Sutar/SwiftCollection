@@ -24,6 +24,11 @@ class Guideline: NSObject {
         imagePath = guidelineDictionary["artworkUrl512"] as! String
     }
     
+    func getGuidelineImageName() -> String {
+        
+        return "\(identifier)_\(version).png"
+    }
+    
     func getGuidelineImagePath() -> String {
         
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
